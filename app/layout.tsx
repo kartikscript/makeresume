@@ -1,8 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Gupter, Roboto_Condensed } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const GUPTER = Gupter({ 
+  subsets: ["latin"],
+  weight:['400','500','700'],
+  variable:'--font-gupter'
+ });
+const ROBOTO = Roboto_Condensed({ 
+  subsets: ["latin"],
+  weight:['400','500','600','700'],
+  variable:'--font-roboto'
+ });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${ROBOTO.variable} ${GUPTER.variable}`}>{children}</body>
     </html>
   );
 }
