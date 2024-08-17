@@ -31,14 +31,28 @@ const PreviewResume = () => {
 
       <div className='bg-primary-200 text-primary-50 w-full pl-16 pt-16'>
         <div className='space-y-5'>
-         <h2 className='text-4xl font-Roboto tracking-wider font-medium text-white'>Education</h2>
-         <p className='text-lg font-Gupter tracking-widest '>2012 - 2016 :<br/>Shadow Certified Academy<br/>Fashion Designing</p>
-         <p className='text-lg font-Gupter tracking-widest '>2018 - 2022 :<br/>Uniex Certified University<br/>Fashion Designing</p>
+          <h2 className='text-4xl font-Roboto tracking-wider font-medium text-white'>Education</h2>
+          <p className='text-lg font-Gupter tracking-widest '>2012 - 2016 :<br/>Shadow Certified Academy<br/>Fashion Designing</p>
+          <p className='text-lg font-Gupter tracking-widest '>2018 - 2022 :<br/>Uniex Certified University<br/>Fashion Designing</p>
         </div>
         <div className='space-y-5 mt-10'>
-         <h2 className='text-4xl font-Roboto tracking-wider font-medium text-white'>Experience</h2>
-         <p className='text-lg font-Gupter tracking-widest '>2023 - 2024 :<br/>Fashion Designer Intern<br/>Coplers Pvt Lmt</p>
-         <p className='text-lg font-Gupter tracking-widest '>2018 - 2022 :<br/>Uniex Certified University<br/>Fashion Designing</p>
+          <h2 className='text-4xl font-Roboto tracking-wider font-medium text-white'>Experience</h2>
+          {/* map below experience data */}
+          <p className='text-lg font-Gupter tracking-widest '>2023 - 2024 :<br/>Fashion Designer Intern<br/>Coplers Pvt Lmt</p>
+          <p className='text-lg font-Gupter tracking-widest '>2018 - present :<br/>Uniex Certified University<br/>Fashion Designing</p>
+        </div>
+        <div className='mt-10 space-y-6'>
+          <h2 className='text-4xl  font-Roboto tracking-wider font-medium text-white'>Skills</h2>
+           {
+           [1,2,3].map(item=>{
+            return(
+              <div className='space-y-2'>
+                <p className='text-lg font-Gupter tracking-widest'>Drawing Sketch</p>
+                <div className='relative overflow-hidden h-3 w-44 rounded-full bg-white'><span style={{width:'50%'}} className='absolute left-0 h-3 bg-primary-100'/></div>
+              </div>
+            )
+           })
+           }
         </div>
       </div>
     </div> 
