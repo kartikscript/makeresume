@@ -4,7 +4,7 @@ import React from 'react'
 
 const PreviewResume = () => {
   return (
-    <div className="w-[794px] h-[1123px] flex text-texts bg-primary-50 scale-50 origin-top overflow-hidden rounded-3xl shadow-inner  ">
+    <div className="w-[794px] h-[1123px] flex text-texts bg-primary-50 scale-50 ring-8 ring-white ring-offset-4 ring-offset-primary-200 origin-top overflow-hidden rounded-3xl shadow-inner  ">
       <div className='bg-primary-50 w-full pt-16 space-y-4'>
         <div className='h-[365px] relative bg-primary-100 rounded-l-full ml-8'>
           <Image
