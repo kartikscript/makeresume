@@ -2,10 +2,10 @@ import React from 'react'
 
 const PersonalDetailsPage = () => {
   return (
-    <div className="min-h-screen flex flex-col  justify-center bg-background p-8">
-    <h2 className="text-4xl font-Gupter font-[600] mb-8 p-4 tracking-wide border-l-2 border-l-secondary-100">Add Your Details</h2>
+    <div className="min-h-screen flex flex-col  justify-start  p-8">
+    <h2 className="text-4xl font-Gupter font-[600] mb-8 p-4 tracking-wide border-l-2 border-l-secondary-100">Add Your Personal Details</h2>
 
-    <form className='text-primary-50 w-5/12'>
+    <form className='text-primary-50 w-5/12 '>
       
       <div className="mb-6">                                                                                                                              
         <label htmlFor="name" className="block  font-semibold mb-2">Name</label>
