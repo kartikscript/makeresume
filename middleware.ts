@@ -1,7 +1,7 @@
 import { authMiddleware } from '@clerk/nextjs/server'
 
 export default authMiddleware({
-  ignoredRoutes: ['/api/webhooks(.*)'],
+  ignoredRoutes: ['/api/webhooks/clerk'],
 })
 
 export const config = {
@@ -10,5 +10,6 @@ export const config = {
     '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
     // Always run for API routes
     '/(api|trpc)(.*)',
+    '/'
   ],
 }
