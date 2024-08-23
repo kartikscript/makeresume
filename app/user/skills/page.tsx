@@ -1,12 +1,17 @@
+'use client'
+import CustomButton from '@/components/CustomButton'
 import { MinusSquare } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 const SkillsPage = () => {
+
+  const router = useRouter()
   return (
-    <div className="min-h-screen flex flex-col  justify-start bg-gradient-to-bl to-secondary-100 from-secondary-200 p-8 pb-0">
+    <div className="min-h-screen flex flex-col  justify-start bg-gradient-to-bl to-secondary-100 from-secondary-200 p-8 ">
     <h2 className="text-4xl font-Gupter font-[600] mb-8 p-4 tracking-wide border-l-2 border-l-secondary-100">Add Your Skills (&lt;5) </h2>
 
-    <form className='text-primary-50 w-5/12 '>
+    <section className='text-primary-50 w-6/12 '>
       
       <div className="mb-6">                                                                                                                              
         <label htmlFor="name" className="block  font-semibold mb-2">Skill</label>
@@ -25,14 +30,16 @@ const SkillsPage = () => {
          <option>100%</option>
         </select>
       </div>
-      <div className="text-center">
-        <button type="submit" className="w-6/12 ring-2 ring-primary-50   font-semibold bg-primary-500 text-white py-2 px-4 rounded-lg hover:text-secondary-200 hover:bg-primary-50 hover:font-semibold active:text-white active:bg-secondary-100 transition duration-300">Add</button>
-      </div>
+      <CustomButton
+       title='Add'
+       btnStyles='w-5/12'
+       handleClick={()=>{}}
+      />
 
       
 
       <div>
-        <h2 className="text-2xl font-Gupter font-[600] mb-4 mt-12 p-2 tracking-wide border-l-2 border-l-secondary-100">Added skills</h2>
+        <h2 className="text-2xl font-Gupter font-[600] mb-4 mt-12 p-2 tracking-wide border-l-2 border-l-secondary-100">Your skills</h2>
         <ul className='space-y-3'>
           <li className='flex items-center w-fit pb-2 gap-3 border-b-2 border-b-secondary-100 '>Frontend Developer - 70% <button className='text-red-400 transition-colors hover:text-red-500'><MinusSquare/></button></li>
           <li className='flex items-center w-fit pb-2 gap-3 border-b-2 border-b-secondary-100 '>Frontend Developer - 70% <button className='text-red-400 transition-colors hover:text-red-500'><MinusSquare/></button></li>
@@ -41,7 +48,20 @@ const SkillsPage = () => {
           <li className='flex items-center w-fit pb-2 gap-3 border-b-2 border-b-secondary-100 '>Frontend Developer - 70% <button className='text-red-400 transition-colors hover:text-red-500'><MinusSquare/></button></li>
         </ul>
       </div>
-    </form>
+      <div className='flex justify-between mt-10'>
+        <CustomButton
+        title='&larr; Back'
+        btnStyles='w-full'
+        handleClick={()=>router.replace('/user/workExpDetails')}
+        />
+        <CustomButton
+        title='Next &rarr;'
+        btnStyles='w-full'
+        handleClick={()=>router.replace('/user/summary')}
+        />
+
+      </div>
+    </section>
   </div>
   )
 }

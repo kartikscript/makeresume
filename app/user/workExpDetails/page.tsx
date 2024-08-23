@@ -1,11 +1,16 @@
+'use client'
+import CustomButton from '@/components/CustomButton'
+import { MinusSquare } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 const WorkExpPage = () => {
+  const router = useRouter()
   return (
     <div className="min-h-screen flex flex-col   justify-start p-8">
     <h2 className="text-4xl font-Gupter font-[600] mb-8 p-4 tracking-wide border-l-2 border-l-secondary-100">Add Your Work Experience Details</h2>
 
-    <form className='text-primary-50 w-8/12'>
+    <section className='text-primary-50 w-8/12'>
       
       <div className="mb-6 py-4 border-b-2 border-b-secondary-100">                                                                                                                              
         <label htmlFor="name" className="block  font-semibold mb-2">Company Name</label>
@@ -23,10 +28,40 @@ const WorkExpPage = () => {
         
       </div>
     
-      <div className="text-center">
-        <button type="submit" className="w-full  font-semibold bg-primary-500 text-white py-2 px-4 rounded-lg hover:bg-primary-600 transition duration-300">Add more</button>
+      <CustomButton
+       title='Add'
+       btnStyles='w-3/12'
+       handleClick={()=>{}}
+      />
+      <div>
+      <h2 className="text-2xl font-Gupter font-[600] my-8 p-2 tracking-wide border-l-2 border-l-secondary-100">Your Work Experience Details</h2>
+      <ul className='space-y-4'>
+      <li
+       className='flex items-center w-fit pb-2 gap-3 border-b-2 border-b-secondary-100 '
+       >Worked in Uniex Private Limited (2019-2023) as Fashion Designer<button className='text-red-400 transition-colors hover:text-red-500'><MinusSquare/></button>
+      </li>
+      <li
+       className='flex items-center w-fit pb-2 gap-3 border-b-2 border-b-secondary-100 '
+       >Worked in Uniex Private Limited (2019-2023) as Fashion Designer<button className='text-red-400 transition-colors hover:text-red-500'><MinusSquare/></button>
+      </li>
+
+       
+      </ul>
       </div>
-    </form>
+      <div className='flex justify-between mt-10'>
+        <CustomButton
+        title='&larr; Back'
+        btnStyles='w-full'
+        handleClick={()=>router.back()}
+        />
+        <CustomButton
+        title='Next &rarr;'
+        btnStyles='w-full'
+        handleClick={()=>router.push('/user/skills')}
+        />
+
+      </div>
+    </section>
   </div>
   )
 }

@@ -1,14 +1,19 @@
+'use client'
+import CustomButton from '@/components/CustomButton'
 import { PenLine } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 const EducationDetailsPage = () => {
+  const router = useRouter()
+
   return (
     <div className="min-h-screen flex flex-col  justify-start p-8">
     <h2 className="text-4xl font-Gupter font-[600] mb-8 p-4 tracking-wide border-l-2 border-l-secondary-100">Add Your Education Details</h2>
 
-    <form className='text-primary-50 w-8/12 '>
+    <section className='text-primary-50 w-8/12 '>
       
-      <div className="mb-6 py-4 border-b-2 border-b-secondary-100">                                                                                                                              
+      <div className="mb-6 pb-4 border-b-2 border-b-secondary-100">                                                                                                                              
         <label htmlFor="name" className="block  font-semibold mb-2">Academy Name (10+2)</label>
         <input type="text" id="name" className="w-full text-texts font-semibold px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500" placeholder="Enter your academy name" />
         <span className='flex gap-3 items-center mt-2'>
@@ -23,7 +28,7 @@ const EducationDetailsPage = () => {
         </div>
         
       </div>
-      <div className="mb-6 py-4  ">                                                                                                                              
+      <div className="mb-10  ">                                                                                                                              
         <label htmlFor="name" className="block  font-semibold mb-2">University Name</label>
         <input type="text" id="name" className="w-full text-texts font-semibold px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500" placeholder="Enter your university name" />
         <span className='flex gap-3 items-center mt-2'>
@@ -39,10 +44,20 @@ const EducationDetailsPage = () => {
         
       </div>
 
-      <div className="text-center">
-        <button type="submit" className="w-full  font-semibold bg-primary-500 text-white py-2 px-4 rounded-lg hover:bg-primary-600 transition duration-300">Submit</button>
+      <div className='flex justify-between'>
+        <CustomButton
+        title='&larr; Back'
+        btnStyles='w-full'
+        handleClick={()=>router.replace('/user/personalDetails')}
+        />
+        <CustomButton
+        title='Next &rarr;'
+        btnStyles='w-full'
+        handleClick={()=>router.replace('/user/workExpDetails')}
+        />
+
       </div>
-    </form>
+    </section>
   </div>
   )
 }

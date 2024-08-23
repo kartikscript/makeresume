@@ -14,11 +14,11 @@ export default function DetailsLayout({
   return (
     <html lang="en">
       <body>
-        <main className="grid grid-cols-11 bg-gradient-to-bl overflow-hidden h-screen to-secondary-100 from-secondary-200">
-          <div className="col-span-6 border-r-2 border-r-secondary-100">
+        <main className="grid grid-cols-11 bg-gradient-to-bl  h-screen to-secondary-100 from-secondary-200">
+          <div className="col-span-6 overflow-y-auto border-r-2 border-r-secondary-100">
          {children}
           </div>
-         <div className="col-span-5 pt-12 ">
+         <div className="col-span-5 overflow-hidden pt-12 ">
           <PreviewResume/>
          </div>
         </main>
