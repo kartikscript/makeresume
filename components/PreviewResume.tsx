@@ -46,7 +46,7 @@ const PreviewResume = () => {
            {
            [1,2,3].map(item=>{
             return(
-              <div className='space-y-2'>
+              <div key={item} className='space-y-2'>
                 <p className='text-lg font-Gupter tracking-widest'>Drawing Sketch</p>
                 <div className='relative overflow-hidden h-3 w-44 rounded-full bg-white'><span style={{width:'50%'}} className='absolute left-0 h-3 bg-primary-100'/></div>
               </div>
