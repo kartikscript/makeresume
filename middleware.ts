@@ -27,11 +27,12 @@
 // };
 
 import { clerkMiddleware } from '@clerk/nextjs/server'
+import { authMiddleware } from '@clerk/nextjs/server';
 
-export default clerkMiddleware((auth) => {
-  // a 
-})
-
+export default authMiddleware({
+  publicRoutes: ['/', '/api/webhooks/clerk', '/sign-up','/sign-in'],
+  
+});
 export const config = {
   matcher: [
     // Skip Next.js internals and all static files, unless found in search params
