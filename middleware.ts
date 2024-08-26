@@ -29,7 +29,7 @@
 import { clerkMiddleware } from '@clerk/nextjs/server'
 
 export default clerkMiddleware((auth) => {
-  auth().protect()
+  // a 
 })
 
 export const config = {

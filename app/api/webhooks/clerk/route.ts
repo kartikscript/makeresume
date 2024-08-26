@@ -1,13 +1,8 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
-import { clerkClient, WebhookEvent } from '@clerk/nextjs/server'
-import { db } from '@/drizzle'
-import { users } from '@/drizzle/schema'
-import { NextResponse } from 'next/server'
-import { eq } from 'drizzle-orm'
+import { WebhookEvent } from '@clerk/nextjs/server'
 
 export async function POST(req: Request) {
-  console.log('web hook ran !!!')
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET
 
@@ -55,57 +50,6 @@ export async function POST(req: Request) {
   // For this guide, you simply log the payload to the console
   const { id } = evt.data
   const eventType = evt.type
-
-  if (eventType === "user.created") {
-    const { id, email_addresses, image_url, first_name, last_name } = evt.data;
-
-    const user = {
-      clerkId:id,
-      name:`${first_name} ${last_name}`,
-      email: email_addresses[0].email_address,
-      profilePhoto:image_url,
-    };
-    console.log(user)
-    // const newUser = await createUser(user);
-    const newUser = await db.insert(users).values(user).returning({id:users.id})
-
-    // Set public metadata
-    if (newUser[0]) {
-      await clerkClient.users.updateUserMetadata(id, {
-        publicMetadata: {
-          userId: newUser[0].id,
-        },
-      });
-    }
-
-    return NextResponse.json({ message: "OK", user: newUser });
-  }
-
-  // UPDATE
-  if (eventType === "user.updated") {
-    const { id, image_url, first_name, last_name, username } = evt.data;
-
-    const user = {
-      name:`${first_name} ${last_name}`,
-      profilePhoto:image_url,
-    };
-
-
-    // const updatedUser = await updateUser(id, user);
-    const updatedUser = await db.update(users).set(user).where(eq(users.clerkId,id ))
-
-    return NextResponse.json({ message: "OK", user: updatedUser });
-  }
-
-  // DELETE
-  if (eventType === "user.deleted") {
-    const { id } = evt.data;
-    
-    // const deletedUser = await deleteUser(id!);
-    const deletedUser = await db.delete(users).where(eq(users.clerkId,id as string))
-
-    return NextResponse.json({ message: "OK", user: deletedUser });
-  }
   console.log(`Webhook with and ID of ${id} and type of ${eventType}`)
   console.log('Webhook body:', body)
 

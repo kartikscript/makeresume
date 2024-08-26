@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Gupter, Roboto_Condensed } from "next/font/google";
 import "./globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkProvider, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import Link from "next/link";
 
 const GUPTER = Gupter({ 
   subsets: ["latin"],
@@ -27,6 +28,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
+        
         <body className={`${ROBOTO.variable} ${GUPTER.variable}`}>{children}</body>
       </html>
     </ClerkProvider>
