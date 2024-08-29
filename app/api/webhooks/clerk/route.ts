@@ -65,7 +65,7 @@ export async function POST(req: Request) {
     };
 
     console.log(user, typeof id)
-    // const newUser = await db.insert(users).values(user).returning({clerkId:users.clerkId});
+    const newUser = await db.insert(users).values(user).returning({clerkId:users.clerkId});
     // console.log('ye dekhoo',newUser)
     // // Set public metadata
     
