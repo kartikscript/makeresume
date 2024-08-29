@@ -57,8 +57,15 @@ export async function POST(req: Request) {
   if(eventType==='user.created'){
     const { id, email_addresses, image_url, first_name, last_name } = evt.data;
 
-console.log('good to goooo')
-    // const newUser = await db.insert(users).values({clerkId:id,email:email_addresses[0].email_address,name:`${first_name} ${last_name}`,profilePhoto:image_url}).returning({clerkId:users.clerkId});
+    const user = {
+      clerkId: id,
+      email: email_addresses[0].email_address,
+      name: `${first_name} ${last_name}`,
+      profilePhoto: image_url,
+    };
+
+    console.log(user, typeof id)
+    // const newUser = await db.insert(users).values(user).returning({clerkId:users.clerkId});
     // console.log('ye dekhoo',newUser)
     // // Set public metadata
     
@@ -70,7 +77,7 @@ console.log('good to goooo')
     //   });
     // }
 
-    return NextResponse.json({ message: "OK", user: 'newUser' });
+    return NextResponse.json({ message: "OK", user: '' });
   }
   console.log(`Webhook with and ID of ${id} and type of ${eventType}`)
   console.log('Webhook body:', body)
