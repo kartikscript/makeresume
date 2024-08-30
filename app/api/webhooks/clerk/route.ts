@@ -3,8 +3,8 @@ import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { clerkClient, WebhookEvent } from '@clerk/nextjs/server'
 import { NextResponse } from 'next/server'
-import { db } from '@/drizzle'
-import { users } from '@/drizzle/schema'
+import { createUser } from '@/actions/user.action'
+
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint
@@ -65,7 +65,18 @@ export async function POST(req: Request) {
     };
 
     console.log(user, typeof id)
-    const newUser = await db.insert(users).values(user).returning({clerkId:users.clerkId});
+
+    
+    const newUser = await createUser(user);
+    
+    console.log(newUser);
+    if (newUser) {
+      await clerkClient.users.updateUserMetadata(id, {
+        publicMetadata: {
+          userId: newUser._id,
+        },
+      });
+    }
     // console.log('ye dekhoo',newUser)
     // // Set public metadata
     
