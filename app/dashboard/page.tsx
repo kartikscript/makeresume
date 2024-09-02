@@ -1,16 +1,30 @@
 'use client'
+import { useGlobalContext } from '@/context/GlobalProvider'
+import { UserProp } from '@/types/types'
+import { useUser } from '@clerk/nextjs'
 import { SquarePlus } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
 const DashboardPage = () => {
 
+  const createResume = () =>{
+    const {user:currentUser} = useUser()
+    const {setUser} = useGlobalContext()
+    setUser((prevUser:UserProp | null)=>{
+      if (prevUser===null){
+        return {}
+      }
+        return {...prevUser,}
+    })
+  }
+
   const router= useRouter()
   return (
     <div className="bg-gradient-to-bl to-secondary-100 from-secondary-200 h-screen p-8">
       <h1 className='font-Gupter text-5xl tracking-wider font-[500] py-4 px-3 border-l-2 border-l-secondary-100'>Dashboard</h1>
       <h1 className='font-Gupter text-3xl tracking-wider font-[400] mt-10 py-2 px-3 border-l-2 border-l-secondary-100'>Your Projects</h1>
-      <section className='mt-10 px-6 pb-4 w-full flex gap-8 overflow-x-scroll border-l-2 border-l-secondary-100'>
+      <section className='mt-6 px-6 pb-4 w-full flex gap-8 overflow-x-auto border-l-2 border-l-secondary-100'>
         <div className='w-52 h-72 bg-primary-50 rounded-3xl bg-opacity-70 '>
           <button 
            className='flex justify-center items-center gap-2 w-full h-full tracking-wide flex-col text-secondary-200 font-Roboto font-[700]'

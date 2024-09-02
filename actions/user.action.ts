@@ -2,10 +2,11 @@
 
 import { connect } from "@/lib/db";
 import User from "@/lib/models";
+import { UserProp } from "@/types/types";
 
 
 
-export async function createUser(user: any) {
+export async function createUser(user:UserProp) {
   try {
     await connect();
     const newUser = await User.create(user);

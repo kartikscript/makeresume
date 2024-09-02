@@ -12,8 +12,7 @@ export default function DetailsLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
+    
         <main className="grid grid-cols-11 bg-gradient-to-bl  h-screen to-secondary-100 from-secondary-200">
           <div className="col-span-6 overflow-y-auto border-r-2 border-r-secondary-100">
          {children}
@@ -22,7 +21,6 @@ export default function DetailsLayout({
           <PreviewResume/>
          </div>
         </main>
-      </body>
-    </html>
+      
   );
 }

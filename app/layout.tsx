@@ -1,8 +1,9 @@
+import "./globals.css";
+import 'react-toastify/dist/ReactToastify.css';
 import type { Metadata } from "next";
 import { Gupter, Roboto_Condensed } from "next/font/google";
-import "./globals.css";
 import { ClerkProvider, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import Link from "next/link";
+import { GlobalProvider } from "@/context/GlobalProvider";
 
 const GUPTER = Gupter({ 
   subsets: ["latin"],
@@ -26,10 +27,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    
     <ClerkProvider>
       <html lang="en">
+      <GlobalProvider>
+
         
         <body className={`${ROBOTO.variable} ${GUPTER.variable}`}>{children}</body>
+      </GlobalProvider>
       </html>
     </ClerkProvider>
   );

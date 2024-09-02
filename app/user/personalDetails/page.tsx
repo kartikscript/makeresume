@@ -1,35 +1,85 @@
 'use client'
 import CustomButton from '@/components/CustomButton'
+import CustomInput from '@/components/CustomInput'
+import { useGlobalContext } from '@/context/GlobalProvider'
+import { Resume, UserProp } from '@/types/types'
+import { useAuth, useUser } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const PersonalDetailsPage = () => {
 
+  const {resume, setResume} = useGlobalContext()
   const router = useRouter()
+  const {user:currentUser} = useUser()
+
+  const handleChange = (e:React.ChangeEvent<HTMLInputElement>,title:string)=>{
+    setResume(
+      (prevResume:Resume | null)=>{
+        return{
+          ...prevResume,
+          personalDetails:{
+            ...prevResume?.personalDetails, // Keep other personal details
+            [title]: e.target.value // Dynamically set the field based on the title
+          }
+        }
+      }
+    )
+  }
+
+  const submit = (e:React.FormEvent) =>{
+    e.preventDefault()
+    if(!(resume?.personalDetails?.phoneNumber?.toString().length===10) ){
+      return
+    }
+   router.replace('/user/educationDetails')
+  }
+  
+  useEffect(()=>{
+    console.log('ran !!!!')
+    setResume((prevResume:Resume | null)=>{
+      if(currentUser){
+        return{
+          ...prevResume,
+          personalDetails:{
+            name:currentUser.fullName,
+            email:currentUser.emailAddresses[0]?.emailAddress,
+            profilePhoto:currentUser.imageUrl,
+          }
+        }   
+      }
+      return null
+    })
+
+  },[])
   return (
     <div className="min-h-screen flex flex-col justify-start  p-8">
     <h2 className="text-4xl font-Gupter font-[600] mb-8 p-4 tracking-wide border-l-2 border-l-secondary-100">Add Your Personal Details</h2>
 
-    <section className='text-primary-50 w-6/12 '>
+    <form onSubmit={(e:React.FormEvent)=>submit(e)} className='text-primary-50 w-6/12 '>
       
-      <div className="mb-6">                                                                                                                              
-        <label htmlFor="name" className="block  font-semibold mb-2">Name</label>
-        <input type="text" id="name" className="w-full text-texts font-semibold px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500" placeholder="Enter your name" />
-      </div>
-
-      
-      <div className="mb-6">
-        <label htmlFor="email" className="block  font-semibold mb-2">Email</label>
-        <input type="email" id="email" className="w-full text-texts font-semibold px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500" placeholder="Enter your email" />
-      </div>
-
-      
-      <div className="mb-6">
-        <label htmlFor="phone" className="block  font-semibold mb-2">Phone Number</label>
-        <input type="tel" id="phone" className="w-full text-texts font-semibold px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500" placeholder="Enter your phone number" />
-      </div>
-
-      <div className="mb-10">
+      <CustomInput
+        title='Name'
+        type='text'
+        placeholder='Enter Your Name'
+        value={resume?.personalDetails?.name as string ?? ''}
+        handleChange={(e)=>handleChange(e,'name')}
+      />
+      <CustomInput
+        title='Email'
+        type="email"
+        placeholder='Enter Your Email'
+        value={resume?.personalDetails?.email as string ?? ""}
+        handleChange={(e)=>handleChange(e,'email')}
+      />
+      <CustomInput
+        type='number'
+        title='Phone Number'
+        placeholder='Enter Your Phone Number'
+        value={resume?.personalDetails?.phoneNumber as number ?? ""}
+        handleChange={(e)=>handleChange(e,'phoneNumber')}
+      />
+     <div className="mb-10">
         <label htmlFor="photo" className="block  font-semibold mb-2">Upload Photo</label>
         <input type="file" id="photo" className="w-full font-semibold px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500" />
       </div>
@@ -37,17 +87,17 @@ const PersonalDetailsPage = () => {
         <CustomButton
         title='&larr; Cancel'
         btnStyles='w-full'
+        type='button'
         handleClick={()=>router.replace('/dashboard')}
         />
         <CustomButton
+        type='submit'
         title='Next &rarr;'
         btnStyles='w-full'
-        handleClick={()=>router.replace('/user/educationDetails')}
         />
-
       </div>
-      
-    </section>
+
+    </form>
   </div>
 
   )

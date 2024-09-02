@@ -17,6 +17,12 @@ const EducationDetailSchema = new Schema({
   academyName: {
     type: String,
   },
+  academyStream: {
+    type: String,
+  },
+  universityStream: {
+    type: String,
+  },
   universityName: {
     type: String,
   },
@@ -36,6 +42,7 @@ const EducationDetailSchema = new Schema({
 
 // Sub-schema for Work Experience Details
 const WorkExpDetailSchema = new Schema({
+  _id:String,
   companyName: {
     type: String,
   },
@@ -45,6 +52,9 @@ const WorkExpDetailSchema = new Schema({
   endYear: {
     type: Number,
   },
+  workProfession:{
+    type: String,
+  }
 });
 
 // Sub-schema for Resume
