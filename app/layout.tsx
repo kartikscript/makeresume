@@ -1,9 +1,9 @@
 import "./globals.css";
-import 'react-toastify/dist/ReactToastify.css';
 import type { Metadata } from "next";
 import { Gupter, Roboto_Condensed } from "next/font/google";
 import { ClerkProvider, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { GlobalProvider } from "@/context/GlobalProvider";
+import { Toaster } from "sonner";
 
 const GUPTER = Gupter({ 
   subsets: ["latin"],
@@ -32,8 +32,10 @@ export default function RootLayout({
       <html lang="en">
       <GlobalProvider>
 
-        
-        <body className={`${ROBOTO.variable} ${GUPTER.variable}`}>{children}</body>
+        <body className={`${ROBOTO.variable} ${GUPTER.variable}`}>
+          {children}
+        <Toaster/>
+          </body>
       </GlobalProvider>
       </html>
     </ClerkProvider>

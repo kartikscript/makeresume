@@ -6,6 +6,7 @@ import { Resume, UserProp } from '@/types/types'
 import { useAuth, useUser } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
 import React, { useEffect } from 'react'
+import { toast } from 'sonner'
 
 const PersonalDetailsPage = () => {
 
@@ -30,7 +31,7 @@ const PersonalDetailsPage = () => {
   const submit = (e:React.FormEvent) =>{
     e.preventDefault()
     if(!(resume?.personalDetails?.phoneNumber?.toString().length===10) ){
-      return
+      return toast.error('Enter valid 10 digit number !', {position:'top-left'})
     }
    router.replace('/user/educationDetails')
   }
@@ -83,7 +84,7 @@ const PersonalDetailsPage = () => {
         <label htmlFor="photo" className="block  font-semibold mb-2">Upload Photo</label>
         <input type="file" id="photo" className="w-full font-semibold px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500" />
       </div>
-      <div className='flex justify-between'>
+      <div className='flex justify-around'>
         <CustomButton
         title='&larr; Cancel'
         btnStyles='w-full'

@@ -120,7 +120,7 @@ const EducationDetailsPage = () => {
         
       </div>
 
-      <div className='flex justify-between'>
+      <div className='flex justify-around'>
         <CustomButton
         title='&larr; Back'
         btnStyles='w-full'

@@ -2,6 +2,7 @@ import { Schema, model, models } from "mongoose";
 
 // Sub-schema for Skills
 const SkillSchema = new Schema({
+  _id:String,
   skillName: {
     type: String,
     required: true,
@@ -68,7 +69,7 @@ const ResumeSchema = new Schema({
     summary: { type: String },
     portfolioLink: { type: String },
   },
-  links: [{ link: String }],
+  link: String,
   educationDetails: [EducationDetailSchema],  // Array of education details
   workExperience: [WorkExpDetailSchema],  // Array of work experience details
   skills: [SkillSchema],  // Array of skills

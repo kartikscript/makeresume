@@ -1,16 +1,19 @@
 'use client'
 import PreviewResume from '@/components/PreviewResume'
+import { useGlobalContext } from '@/context/GlobalProvider'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
 const ResumePage = () => {
 
   const router = useRouter()
+  const {resume} = useGlobalContext()
+
   return (
     <main className=" bg-gradient-to-bl to-secondary-100 from-secondary-200 w-full h-screen overflow-hidden grid grid-cols-11">
      
       <section className="col-span-5 pt-8 pl-16 ">
-       <PreviewResume/> {/* remove scale origin-top rounded while converting to img in PreviewResume */}
+       <PreviewResume resume={resume}/> {/* remove scale origin-top rounded while converting to img in PreviewResume */}
       </section>
      
       <section className="col-span-6 text-primary-50 h-screen flex gap-8 flex-col justify-center items-center">

@@ -2,11 +2,11 @@
 import CustomButton from '@/components/CustomButton'
 import CustomInput from '@/components/CustomInput'
 import { useGlobalContext } from '@/context/GlobalProvider'
-import { WorkExpDetail } from '@/types/types'
+import { Resume, WorkExpDetail } from '@/types/types'
 import { MinusSquare } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import { ToastContainer } from 'react-toastify'
+import { toast } from 'sonner'
 import { v4 as uuidv4 } from 'uuid';
 
 const WorkExpPage = () => {
@@ -25,19 +25,11 @@ const WorkExpPage = () => {
 
   const saveWork = (e: React.FormEvent<HTMLFormElement>) =>{
     e.preventDefault()
-    if(workDetailsArr?.length && workDetailsArr?.length > 3){
-      return( <ToastContainer
-      position="top-right"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={true}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-    />)
+    if(workDetailsArr?.length && workDetailsArr?.length === 3){
+      toast.warning('You can add only 3 items !')
+      return
     }
+
       setWorkDetailsArr((prev)=>{
         if (prev && prev.length>0){
           return [...prev,workObject]
@@ -45,8 +37,28 @@ const WorkExpPage = () => {
           return [workObject]
         }
       })
+      setworkObject(
+        {
+          _id:uuidv4(),
+          companyName:'',
+          beginYear:undefined,
+          endYear:undefined,
+          workProfession:''
+        }
+      )
   }
 
+  const deleteWork = (id:string) =>{
+      setWorkDetailsArr((prev)=>{
+        const itemsleft=prev?.filter((item)=>{
+         return item._id !== id
+        })
+       return itemsleft 
+      })
+      toast.success('Item Deleted !',{position:'top-left'})
+  }
+
+  
 
   const handleChange = (e:React.ChangeEvent<HTMLInputElement>,title:string)=>{
       setworkObject(prev=>{
@@ -57,6 +69,17 @@ const WorkExpPage = () => {
       })
   }
 
+  const submit = () =>{
+    setResume(
+      (prevResume:Resume | null)=>{
+        return{
+          ...prevResume,
+         workExperience:workDetailsArr
+        }
+      }
+    )
+    router.replace('/user/skills')
+  }
 
   return (
     <div className="min-h-screen flex flex-col   justify-start p-8">
@@ -124,7 +147,7 @@ const WorkExpPage = () => {
                     className='flex items-center w-fit pb-2 gap-6 border-b-2 border-b-secondary-100 '
                    >
                     Worked in {item.companyName} ({item.beginYear}-{item.endYear}) as {item.workProfession}
-                    <button className='text-red-400 transition-colors hover:text-red-500'>
+                    <button onClick={()=>deleteWork(item._id)} className='text-red-400 transition-colors hover:text-red-500'>
                       <MinusSquare/>
                     </button>
                   </li>
@@ -138,16 +161,18 @@ const WorkExpPage = () => {
           )
         }
       </div>
-      <div className='flex justify-between mt-10'>
+      <div className='flex justify-around mt-10'>
         <CustomButton
         title='&larr; Back'
         btnStyles='w-full'
+        type='button'
         handleClick={()=>router.replace('/user/educationDetails')}
         />
         <CustomButton
         title='Next &rarr;'
         btnStyles='w-full'
-        handleClick={()=>router.replace('/user/skills')}
+        type='button'
+        handleClick={submit}
         />
 
       </div>

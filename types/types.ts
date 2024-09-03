@@ -3,6 +3,7 @@
 
 // Type for SkillSchema
 export interface Skill {
+  _id:string;
   skillName: string;
   skillRate: number;
 }
@@ -47,7 +48,7 @@ export interface Resume {
     univPassInYear?: number;
     univPassOutYear?: number;
   };
-  links?: Array<{ link: string }>;
+  link?: string;
   workExperience?: WorkExpDetail[];
   skills?: Skill[];
 }
