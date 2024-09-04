@@ -35,6 +35,28 @@ const PersonalDetailsPage = () => {
     }
    router.replace('/user/educationDetails')
   }
+
+  const convertToBase64 = (e: React.ChangeEvent<HTMLInputElement>)=>{
+      var reader = new FileReader()
+      if(!e.target.files) return
+      reader.readAsDataURL(e.target.files[0])
+      reader.onload = () =>{
+          if (typeof reader.result === 'string') {
+          setResume(prev=>{
+            return {
+              ...prev,
+              personalDetails:{
+                ...prev?.personalDetails,
+                profilePhoto:reader.result as string
+              }
+            }
+          })
+        }
+      }
+      reader.onerror = (err) =>{
+          console.log(err,'base 64 error')
+      }
+  }
   
   useEffect(()=>{
     console.log('ran !!!!')
@@ -45,7 +67,6 @@ const PersonalDetailsPage = () => {
           personalDetails:{
             name:currentUser.fullName,
             email:currentUser.emailAddresses[0]?.emailAddress,
-            profilePhoto:currentUser.imageUrl,
           }
         }   
       }
@@ -82,7 +103,13 @@ const PersonalDetailsPage = () => {
       />
      <div className="mb-10">
         <label htmlFor="photo" className="block  font-semibold mb-2">Upload Photo</label>
-        <input type="file" id="photo" className="w-full font-semibold px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500" />
+        <input 
+         required
+         onChange={convertToBase64}
+         accept='image/*'
+         type="file" 
+         id="photo" className="w-full font-semibold px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500" 
+         />
       </div>
       <div className='flex justify-around'>
         <CustomButton

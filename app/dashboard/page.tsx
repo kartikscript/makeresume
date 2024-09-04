@@ -2,24 +2,28 @@
 import { useGlobalContext } from '@/context/GlobalProvider'
 import { UserProp } from '@/types/types'
 import { useUser } from '@clerk/nextjs'
+import axios from 'axios'
 import { SquarePlus } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const DashboardPage = () => {
 
-  const createResume = () =>{
-    const {user:currentUser} = useUser()
-    const {setUser} = useGlobalContext()
-    setUser((prevUser:UserProp | null)=>{
-      if (prevUser===null){
-        return {}
-      }
-        return {...prevUser,}
-    })
+  const {user} = useUser()
+  const getResumes = async () =>{
+    try {
+      const resumes = await axios.get('/api/resume', {params:{clerkId:user?.id}})
+      console.log(resumes)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const router= useRouter()
+
+  useEffect(()=>{
+    getResumes()
+  },[])
   return (
     <div className="bg-gradient-to-bl to-secondary-100 from-secondary-200 h-screen p-8">
       <h1 className='font-Gupter text-5xl tracking-wider font-[500] py-4 px-3 border-l-2 border-l-secondary-100'>Dashboard</h1>

@@ -99,7 +99,7 @@ const WorkExpPage = () => {
           <label htmlFor="name" className=" font-semibold mb-2">Worked there from :</label>
           <input 
             required
-            type="number" id="name" min="1900" max="2099" 
+            type="number"  min="1900" max="2099" 
             className="w-2/12 text-texts font-semibold p-1 text-center border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500" 
             placeholder="Year" 
             value={workObject.beginYear || ''}
@@ -108,7 +108,7 @@ const WorkExpPage = () => {
           <p>-</p>
            <input 
             required
-            type="number" id="name" min="1900" max="2099" 
+            type="number"  min="1900" max="2099" 
             className="w-2/12 text-texts font-semibold p-1 text-center border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500" 
             placeholder="Year" 
             value={workObject.endYear || ''}

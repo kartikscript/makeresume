@@ -53,7 +53,7 @@ const EducationDetailsPage = () => {
            required
            value={resume?.educationDetails?.acadPassInYear as number ?? ''}
            onChange={(e:React.ChangeEvent<HTMLInputElement>)=>handleChange( e,'acadPassInYear')}
-           type="number" id="name" min="1900" max="2099"
+           type="number" min="1900" max="2099"
            className="w-2/12 text-texts font-semibold p-1 text-center border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
            placeholder="Year"
             />   
@@ -62,7 +62,7 @@ const EducationDetailsPage = () => {
           required
            value={resume?.educationDetails?.acadPassOutYear as number ?? ''}
            onChange={(e:React.ChangeEvent<HTMLInputElement>)=>handleChange( e,'acadPassOutYear')}
-           type="number" id="name" min="1900" max="2099"
+           type="number" min="1900" max="2099"
            className="w-2/12 text-texts font-semibold p-1 text-center border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
            placeholder="Year"
           />   
@@ -95,7 +95,7 @@ const EducationDetailsPage = () => {
           required
            value={resume?.educationDetails?.univPassInYear as number ?? ''}
            onChange={(e:React.ChangeEvent<HTMLInputElement>)=>handleChange( e,'univPassInYear')}
-           type="number" id="name" min="1900" max="2099"
+           type="number" min="1900" max="2099"
            className="w-2/12 text-texts font-semibold p-1 text-center border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
            placeholder="Year"
             />   
@@ -104,7 +104,7 @@ const EducationDetailsPage = () => {
           required
            value={resume?.educationDetails?.univPassOutYear as number ?? ''}
            onChange={(e:React.ChangeEvent<HTMLInputElement>)=>handleChange( e,'univPassOutYear')}
-           type="number" id="name" min="1900" max="2099"
+           type="number" min="1900" max="2099"
            className="w-2/12 text-texts font-semibold p-1 text-center border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
            placeholder="Year"
           />   

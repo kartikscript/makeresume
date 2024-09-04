@@ -7,6 +7,7 @@ import { useUser } from '@clerk/nextjs'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import React from 'react'
+import { toast } from 'sonner'
 
 const SummaryPage = () => {
 
@@ -19,7 +20,8 @@ const SummaryPage = () => {
         try {
           const clerkId = user?.id
           const savedResume = await axios.post('/api/resume',{resume,clerkId})
-          
+          toast.info('Resume Saved', {position:'top-left'})
+          router.replace(`/resume/${savedResume.data._id}`)
         } catch (error) {
           console.log(error)
         }

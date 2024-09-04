@@ -25,7 +25,6 @@ export const connect = async () => {
     cached.promise ||
     mongoose.connect(MONGODB_URL, {
       dbName: "makeresume",
-      bufferCommands: false,
       connectTimeoutMS: 30000,
     });
 
