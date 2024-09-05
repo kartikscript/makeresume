@@ -67,7 +67,7 @@ export async function POST(req: Request) {
 
     
     const res = await axios.post('https://makeresume-ecru.vercel.app/api/user',user);
-    const newUser = res.data
+    const newUser = res.data.newUser
     console.log('wenhook', user, newUser)
     if (newUser) {
       await clerkClient.users.updateUserMetadata(id, {
@@ -87,7 +87,7 @@ export async function POST(req: Request) {
     //   });
     // }
 
-    return NextResponse.json({ message: "OK", user: '' });
+    return NextResponse.json({ message: "OK", user: newUser });
   }
   console.log(`Webhook with and ID of ${id} and type of ${eventType}`)
   console.log('Webhook body:', body)
