@@ -9,7 +9,6 @@ connect()
 
 export async function GET(req: NextRequest) {
   try {
-    const url = new URL(req.url);
     const { userId:clerkId } = auth()
 
     if (!clerkId) {

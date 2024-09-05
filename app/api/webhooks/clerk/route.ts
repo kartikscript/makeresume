@@ -4,6 +4,7 @@ import { headers } from 'next/headers'
 import { clerkClient, WebhookEvent } from '@clerk/nextjs/server'
 import { NextResponse } from 'next/server'
 import axios from 'axios'
+import User from '@/lib/models'
 
 
 export async function POST(req: Request) {
@@ -65,9 +66,12 @@ export async function POST(req: Request) {
     };
 
 
-    
-    const res = await axios.post('https://makeresume-ecru.vercel.app/api/user',user);
-    const newUser = res.data.newUser
+    const userExists = await User.findOne({clerkId:id})
+    if(userExists){
+      return NextResponse.json('user already exists', {status:200})
+    }
+    const newUser = await User.create(user)
+
     console.log('wenhook', user, newUser)
     if (newUser) {
       await clerkClient.users.updateUserMetadata(id, {
