@@ -21,9 +21,7 @@ const Navbar = () => {
           </span>
          </SignedIn>
          <SignedOut>
-         <span className=' bg-primary-50 px-2 py-1 rounded-2xl'>
-          <Link className='font-medium text-texts mx-8 hover:text-secondary-100' href='/sign-in'>Sign In</Link>
-         </span>
+          <Link className='font-medium bg-primary-50 px-2 py-1 rounded-2xl text-texts mx-8 hover:text-secondary-100' href='/sign-up'>Sign Up</Link>
         </SignedOut>
        </nav>
     </div>

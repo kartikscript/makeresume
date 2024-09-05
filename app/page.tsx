@@ -74,7 +74,7 @@ export default function Home() {
             Join thousands of users who have successfully created their resumes with our app.
           </p>
           <a
-            href="/sign-in"
+            href="/sign-up"
             className="bg-primary-100 text-secondary-200 px-8 py-4 rounded-lg shadow-lg hover:bg-primary-50"
           >
             Start Building Your Resume Now
