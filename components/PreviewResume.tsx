@@ -8,18 +8,9 @@ import jsPDF from 'jspdf';
 
 const PreviewResume = ({resume,download}:{resume:Resume | null, download?:boolean}) => {
 
-  if(resume === null){
-    return (
-      <div className='h-full flex justify-center items-center'>
-        <File/>
-      </div>
-    )
-  }
   const resumeRef = useRef<HTMLDivElement>(null);
   const [isOriginalClassName, setisOriginalClassName] = useState(false)
-  const {educationDetails,link,personalDetails,skills,workExperience} = resume
-  const [firstName,middleName,lastName]=personalDetails?.name?.includes('') ? personalDetails.name.split(' ') : [null,null,null]
-
+  
   
   const downloadPdf =async ()=>{
     if (resumeRef.current) {
@@ -32,20 +23,29 @@ const PreviewResume = ({resume,download}:{resume:Resume | null, download?:boolea
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF('portrait', 'px', [794, 1123]);
       pdf.addImage(imgData, 'PNG', 0, 0, 794, 1123);
-
+      
       setisOriginalClassName(false)
-
+      
       // Save the PDF
       pdf.save('download.pdf');
     }
   }
-
+  
   useEffect(() => {
     if (download) {
       downloadPdf();
     }
   }, [download]);
-
+  
+  if(resume === null){
+    return (
+      <div className='h-full flex justify-center items-center'>
+        <File/>
+      </div>
+    )
+  }
+  const {educationDetails,link,personalDetails,skills,workExperience} = resume
+  const [firstName,middleName,lastName]=personalDetails?.name?.includes('') ? personalDetails.name.split(' ') : [null,null,null]
   return (
     <div ref={resumeRef} className={` ${isOriginalClassName ?'':'scale-50 origin-top overflow-hidden rounded-3xl '} w-[794px] h-[1123px] flex text-texts bg-primary-50 ring-8 ring-white ring-offset-4 ring-offset-primary-200`}>
       <div className='bg-primary-50 w-full pt-16 space-y-4'>
