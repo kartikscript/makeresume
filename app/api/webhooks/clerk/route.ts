@@ -3,7 +3,7 @@ import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { clerkClient, WebhookEvent } from '@clerk/nextjs/server'
 import { NextResponse } from 'next/server'
-import { createUser } from '@/actions/user.action'
+import axios from 'axios'
 
 
 export async function POST(req: Request) {
@@ -66,8 +66,9 @@ export async function POST(req: Request) {
 
 
     
-    const newUser = await createUser(user);
-    
+    const res = await axios.post('/api/user',user);
+    const newUser = res.data
+    console.log('wenhook', user, newUser)
     if (newUser) {
       await clerkClient.users.updateUserMetadata(id, {
         publicMetadata: {
