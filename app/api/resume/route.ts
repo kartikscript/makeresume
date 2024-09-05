@@ -1,6 +1,7 @@
 import { connect } from "@/lib/db";
 import User from "@/lib/models";
 import { UserProp } from "@/types/types";
+import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 
 
@@ -9,7 +10,7 @@ connect()
 export async function GET(req: NextRequest) {
   try {
     const url = new URL(req.url);
-    const clerkId = url.searchParams.get('clerkId');
+    const { userId:clerkId } = auth()
 
     if (!clerkId) {
       return NextResponse.json({ error: 'clerkId is required' }, { status: 400 });
@@ -68,7 +69,7 @@ export async function DELETE(req:NextRequest){
       try {
         const url = new URL(req.url);
        const resumeId = url.searchParams.get('resumeId');
-       const clerkId = url.searchParams.get('clerkId');
+       const { userId:clerkId } = auth()
 
        
     if (!resumeId || !clerkId) {
@@ -83,8 +84,8 @@ export async function DELETE(req:NextRequest){
     }
 
     // Filter out the resume with the given resumeId
-    const updatedResumes = user.resumes.filter((resume:ResumeObj) => resume._id !== resumeId);
-
+    const updatedResumes = user.resumes.filter((resume:ResumeObj) => resume._id.toString() !== resumeId);
+    console.log(updatedResumes)
     // Update the user's resumes array
     await User.updateOne({ clerkId }, { resumes: updatedResumes });
 

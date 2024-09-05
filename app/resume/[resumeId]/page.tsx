@@ -1,6 +1,7 @@
 'use client'
 import PreviewResume from '@/components/PreviewResume'
 import { useGlobalContext } from '@/context/GlobalProvider'
+import { useUser } from '@clerk/nextjs'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
@@ -13,8 +14,8 @@ interface PageProps{
 const ResumePage = ({params}:PageProps) => {
   const {resumeId} =params
 
-  console.log('ID of resume ',params)
   const router = useRouter()
+  const {user} = useUser()
   const [triggerDownload, setTriggerDownload] = useState(false);  // State to trigger download
   const {resume} = useGlobalContext()
 
@@ -26,15 +27,15 @@ const ResumePage = ({params}:PageProps) => {
 
   const deleteResume = async () =>{
       try {
-          await axios.delete('/api/resume',{params:{resumeId}})
-          // router.replace('/dashboard ')
+          await axios.delete('/api/resume',{params:{resumeId,clerkId:user?.id}})
+          router.replace('/dashboard ')
          
       } catch (error) {
         console.log(error)
       }
   }
   return (
-    <main className=" bg-gradient-to-bl to-secondary-100 from-secondary-200 w-full h-screen overflow-hidden grid grid-cols-11">
+    <main className=" w-full h-screen overflow-hidden grid grid-cols-11">
      
       <section className="col-span-5 pt-8 pl-16 ">
        <PreviewResume download={triggerDownload} resume={resume}/> {/* remove scale origin-top rounded while converting to img in PreviewResume */}
@@ -47,16 +48,16 @@ const ResumePage = ({params}:PageProps) => {
         onClick={handleDownload}
       >Download Your Resume !</button>
        <span className="flex gap-8 mt-6 border-t-2 border-secondary-100 pt-4 px-10">
-        <button
+        {/* <button
          onClick={()=>router.replace('/dashboard')}
          className="active:bg-secondary-100 active:text-primary-50 py-2 px-4  tracking-wide font-Gupter font-semibold text-2xl rounded-2xl hover:text-green-700  hover:rounded-xl transition-all bg-primary-50 text-secondary-200"
-        >Go to Dashboard</button>
+        >Go to Dashboard</button> */}
         <button
          onClick={()=>router.push('/user/personalDetails')}
          className="active:bg-secondary-100 active:text-primary-50 py-2 px-4  tracking-wide font-Gupter font-semibold text-2xl rounded-2xl hover:text-secondary-100  hover:rounded-xl transition-all bg-primary-50 text-secondary-200"
         >Edit</button>
         <button
-         onClick={deleteResume}
+         onClick={()=>deleteResume()}
          className="active:bg-red-500 active:text-primary-50 py-2 px-4 tracking-wide  font-Gupter font-semibold text-2xl rounded-2xl hover:text-red-700  hover:rounded-xl transition-all bg-primary-50 text-secondary-200"
         >Delete</button>
        </span>

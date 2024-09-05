@@ -48,6 +48,7 @@ export interface Resume {
     univPassInYear?: number;
     univPassOutYear?: number;
   };
+  _id?:string
   link?: string;
   workExperience?: WorkExpDetail[];
   skills?: Skill[];

@@ -4,6 +4,7 @@ import { Gupter, Roboto_Condensed } from "next/font/google";
 import { ClerkProvider, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { GlobalProvider } from "@/context/GlobalProvider";
 import { Toaster } from "sonner";
+import Navbar from "@/components/Navbar";
 
 const GUPTER = Gupter({ 
   subsets: ["latin"],
@@ -32,7 +33,8 @@ export default function RootLayout({
       <html lang="en">
       <GlobalProvider>
 
-        <body className={`${ROBOTO.variable} ${GUPTER.variable}`}>
+        <body className={`${ROBOTO.variable} ${GUPTER.variable} bg-gradient-radial to-secondary-100 from-secondary-200 `}>
+          <Navbar/>
           {children}
         <Toaster/>
           </body>

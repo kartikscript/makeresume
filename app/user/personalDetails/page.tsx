@@ -59,7 +59,6 @@ const PersonalDetailsPage = () => {
   }
   
   useEffect(()=>{
-    console.log('ran !!!!')
     setResume((prevResume:Resume | null)=>{
       if(currentUser){
         return{

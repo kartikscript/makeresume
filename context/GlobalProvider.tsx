@@ -25,7 +25,6 @@ export const GlobalProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     }
   );
 
-  console.log(resume)
   // useEffect(() => {
   //   if (typeof window !== 'undefined' && resume !== null) {
   //     // Save formData to localStorage whenever it changes
