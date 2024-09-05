@@ -66,7 +66,7 @@ export async function POST(req: Request) {
 
 
     
-    const res = await axios.post('/api/user',user);
+    const res = await axios.post('https://makeresume-ecru.vercel.app/api/user',user);
     const newUser = res.data
     console.log('wenhook', user, newUser)
     if (newUser) {
