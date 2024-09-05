@@ -19,7 +19,7 @@ export default function Home() {
               Create a resume that stands out in just a few minutes. Choose from a range of modern, professionally designed templates, and customize your resume with ease.
             </p>
             <a
-              href="/sign-in"
+              href="/dashboard"
               className="bg-secondary-200 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-secondary-100"
             >
               Get Started

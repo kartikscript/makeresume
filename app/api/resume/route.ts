@@ -52,8 +52,6 @@ export async function POST(req:NextRequest){
       await user.save();
       const addedResume = user.resumes[user.resumes.length - 1];
 
-      console.log('Resume added successfully',user);
-        console.log('reached !!!!',addedResume)
       return NextResponse.json(addedResume,{status:201})
     } catch (error) {
       console.log(error)
@@ -85,7 +83,6 @@ export async function DELETE(req:NextRequest){
 
     // Filter out the resume with the given resumeId
     const updatedResumes = user.resumes.filter((resume:ResumeObj) => resume._id.toString() !== resumeId);
-    console.log(updatedResumes)
     // Update the user's resumes array
     await User.updateOne({ clerkId }, { resumes: updatedResumes });
 
